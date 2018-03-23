@@ -3,21 +3,21 @@ import './App.css';
 import '../node_modules/react-vis/dist/style.css';
 
 import {XYPlot, LineSeries, MarkSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis} from 'react-vis';
-//import {csv} from 'd3-request'
-import * as axios from 'axios'
+
+import * as axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const classPalate = [
-      "#e41a1c",
-      "#377eb8",
-      "#4daf4a",
-      "#984ea3",
-      "#ff7f00",
-      "#ffff33",
-      "#a65628",
-      "#f781bf",
-      "#999999",
+  "#e41a1c",
+  "#377eb8",
+  "#4daf4a",
+  "#984ea3",
+  "#ff7f00",
+  "#ffff33",
+  "#a65628",
+  "#f781bf",
+  "#999999",
 ];
 
 class CheckBox extends Component {
@@ -33,8 +33,8 @@ class CheckBox extends Component {
   render() {
     return (
       <div>
-      <input id={this.props.id} type="checkbox" checked={this.props.checked} onChange={this.handleChange}/>
-      <label htmlFor={this.props.id}>{this.props.label}</label>
+        <input id={this.props.id} type="checkbox" checked={this.props.checked} onChange={this.handleChange}/>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
       </div>
     );
   }
@@ -54,13 +54,13 @@ class ChoiceList extends Component {
     return (
       <div className="ChoiceList">
         {Object.keys(this.props.data).map( (d) =>
-          <CheckBox
-            id={d}
-            label={'Category '+d}
-            key={d}
-            checked={this.props.data[d]}
-            onCheckChange={this.handleSelectionChange} />
-        )}
+                                           <CheckBox
+                                               id={d}
+                                               label={'Category '+d}
+                                               key={d}
+                                               checked={this.props.data[d]}
+                                               onCheckChange={this.handleSelectionChange} />
+                                         )}
       </div>
     );
   }
@@ -70,7 +70,7 @@ class MeshPlot extends Component {
 
   render() {
     const defaultStyle = {
-      display: 'inline-block',
+      display: 'inline-block'
     };
 
     return (
@@ -79,8 +79,8 @@ class MeshPlot extends Component {
           {Object.keys(this.props.data).map(
             (k) => <MarkSeries key={k} data={this.props.data[k]} color={classPalate[k]} size={this.props.size}/>
           )}
-        </XYPlot>
-      </div>
+      </XYPlot>
+        </div>
     );
   }
 }
@@ -99,7 +99,7 @@ class PersistanceDiagram extends Component {
     maxValue = 1.2*maxValue; // add some padding
 
     const defaultStyle = {
-      display: 'inline-block',
+      display: 'inline-block'
     };
 
     return (
@@ -111,10 +111,10 @@ class PersistanceDiagram extends Component {
           <YAxis />
           <LineSeries data={[{x:0, y:0}, {x:maxValue, y:maxValue}]} color='#636363' />
           {Object.keys(this.props.data).map( (k) =>
-            <MarkSeries data={this.props.data[k]} key={k} />
-          )}
-        </XYPlot>
-      </div>
+                                             <MarkSeries data={this.props.data[k]} key={k} />
+                                           )}
+      </XYPlot>
+        </div>
     );
   }
 }
@@ -203,14 +203,14 @@ class App extends Component {
   }
 
   getQueriedMesh(original, query) {
-      let queriedData = {};
-      for(let k of Object.keys(original)) {
-        if(query[k] === true) {
-          queriedData[k] = original[k];
-        }
+    let queriedData = {};
+    for(let k of Object.keys(original)) {
+      if(query[k] === true) {
+        queriedData[k] = original[k];
       }
-      return queriedData;
     }
+    return queriedData;
+  }
 
   componentDidMount() {
     // TODO more efficient way to parse data
@@ -265,12 +265,12 @@ class App extends Component {
         <div className="panel-heading">Mesh</div>
         <div className="panel-body">
           <MeshPlot
-          height={500} width={500}
-          data={queriedMesh || []}
-          xDomain={this.state.mesh_domain.xDomain}
-          yDomain={this.state.mesh_domain.yDomain}
-          size={10}
-          />
+            height={500} width={500}
+            data={queriedMesh || []}
+            xDomain={this.state.mesh_domain.xDomain}
+            yDomain={this.state.mesh_domain.yDomain}
+            size={10}
+            />
         </div>
       </div>
     );
@@ -324,3 +324,8 @@ class App extends Component {
 }
 
 export default App;
+
+/* Local Variables:  */
+/* mode: RJSX        */
+/* js-indent-level: 2    */
+/* End:              */
