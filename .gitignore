@@ -35,3 +35,9 @@ build/
 *.exe
 *.out
 *.app
+
+# Things carlos added
+*~
+data
+ANN
+ann_1.1.2
