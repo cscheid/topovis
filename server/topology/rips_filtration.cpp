@@ -92,7 +92,7 @@ bool RipsFiltration::build_filtration()  {
 			max_num_simplices *= (num_points-j);
 		for(int j = 1; j <= i; j++)
 			max_num_simplices /= (j+1);
-		std::cout << "number of " << i << " simplices: " << simplex_count[i] << std::endl;
+		std::cerr << "number of " << i << " simplices: " << simplex_count[i] << std::endl;
 	}
 
 	return true;

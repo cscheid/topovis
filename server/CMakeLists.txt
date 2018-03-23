@@ -12,3 +12,6 @@ target_link_libraries( toposerver topology geometry ANN )
 
 add_executable(example_gen example_gen.cc)
 target_link_libraries( example_gen topology geometry ANN )
+
+add_executable(pset_to_rips pset_to_rips.cc)
+target_link_libraries( pset_to_rips topology geometry ANN )
