@@ -11,7 +11,7 @@ struct BMCell {
     int first; //global simplex ID
     int second; //complex ID (which this simplex belongs to in the context of a cover)
 
-    void print() { std::cout << "(" << first << ", " << second << ")"; }
+    void print() { std::cerr << "(" << first << ", " << second << ")"; }
 
     inline bool operator==(const BMCell& other) const{
         return this->first == other.first && this->second == other.second;

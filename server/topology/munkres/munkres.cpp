@@ -87,21 +87,21 @@ Munkres::step2(void) {
 
   if ( covercount >= k ) {
 #ifdef DEBUG
-    std::cout << "Final cover count: " << covercount << std::endl;
+    std::cerr << "Final cover count: " << covercount << std::endl;
 #endif
     return 0;
   }
 
 #ifdef DEBUG
-  std::cout << "Munkres matrix has " << covercount << " of " << k << " Columns covered:" << std::endl;
+  std::cerr << "Munkres matrix has " << covercount << " of " << k << " Columns covered:" << std::endl;
   for ( int row = 0 ; row < rows ; row++ ) {
     for ( int col = 0 ; col < cols ; col++ ) {
-      std::cout.width(8);
-      std::cout << matrix(row,col) << ",";
+      std::cerr.width(8);
+      std::cerr << matrix(row,col) << ",";
     }
-    std::cout << std::endl;
+    std::cerr << std::endl;
   }
-  std::cout << std::endl;
+  std::cerr << std::endl;
 #endif
 
 
@@ -175,10 +175,10 @@ Munkres::step3(void) {
 		/*
 		if(found_uncovered_entry && verify_found_uncovered)  {
 			if(verify_saverow != saverow || verify_savecol != savecol)
-				std::cout << "badness! " << verify_saverow << " : " << saverow << " ; " << verify_savecol << " : " << savecol << std::endl;
+				std::cerr << "badness! " << verify_saverow << " : " << saverow << " ; " << verify_savecol << " : " << savecol << std::endl;
 		}
 		if((!found_uncovered_entry && verify_found_uncovered) || (found_uncovered_entry && !verify_found_uncovered))
-			std::cout << "one found it, the other didn't!" << std::endl;
+			std::cerr << "one found it, the other didn't!" << std::endl;
 			*/
 
 		if(!found_uncovered_entry)
@@ -358,15 +358,15 @@ Munkres::solve(Eigen::MatrixXd &m) {
   // Assignments are remaining 0 values
   // (extra 0 values are replaced with -1)
 #ifdef DEBUG
-  std::cout << "Munkres input matrix:" << std::endl;
+  std::cerr << "Munkres input matrix:" << std::endl;
   for ( int row = 0 ; row < m.rows() ; row++ ) {
     for ( int col = 0 ; col < m.cols() ; col++ ) {
-      std::cout.width(8);
-      std::cout << m(row,col) << ",";
+      std::cerr.width(8);
+      std::cerr << m(row,col) << ",";
     }
-    std::cout << std::endl;
+    std::cerr << std::endl;
   }
-  std::cout << std::endl;
+  std::cerr << std::endl;
 #endif
 
   double highValue = 0;
@@ -400,7 +400,7 @@ Munkres::solve(Eigen::MatrixXd &m) {
     col_mask[i] = false;
   }
 
-  //std::cout << "munkres" << std::endl;
+  //std::cerr << "munkres" << std::endl;
   ComputationTimer step3_timer("step 3");
   ComputationTimer step4_timer("step 4");
   ComputationTimer step5_timer("step 5");
@@ -435,7 +435,7 @@ Munkres::solve(Eigen::MatrixXd &m) {
         break;
     }
   }
-  std::cout << "... done" << std::endl;
+  std::cerr << "... done" << std::endl;
 
   // Store results
   for ( int row = 0 ; row < matrix.rows() ; row++ )
@@ -446,15 +446,15 @@ Munkres::solve(Eigen::MatrixXd &m) {
         matrix(row,col) = -1;
 
 #ifdef DEBUG
-  std::cout << "Munkres output matrix:" << std::endl;
+  std::cerr << "Munkres output matrix:" << std::endl;
   for ( int row = 0 ; row < matrix.rows() ; row++ ) {
     for ( int col = 0 ; col < matrix.cols() ; col++ ) {
-      std::cout.width(1);
-      std::cout << matrix(row,col) << ",";
+      std::cerr.width(1);
+      std::cerr << matrix(row,col) << ",";
     }
-    std::cout << std::endl;
+    std::cerr << std::endl;
   }
-  std::cout << std::endl;
+  std::cerr << std::endl;
 #endif
 
   m = matrix;

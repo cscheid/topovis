@@ -53,11 +53,11 @@ SparseRipsFiltration::SparseRipsFiltration(int _maxD, double _eps) : Filtration(
 
 SparseRipsFiltration::~SparseRipsFiltration()  {
 	if(is_initialized)  {
-		std::cout << "deleting cover tree..." << std::endl;
+		std::cerr << "deleting cover tree..." << std::endl;
 		//delete cover_tree;
-		std::cout << "deleting metric space..." << std::endl;
+		std::cerr << "deleting metric space..." << std::endl;
 		delete metric_space;
-		std::cout << "done with deletion" << std::endl;
+		std::cerr << "done with deletion" << std::endl;
 	}
 }
 
@@ -113,7 +113,7 @@ bool SparseRipsFiltration::build_filtration()  {
 		metric_space->set_time_scale(1);
 		this->sparse_bron_kerbosch(&all_simplices, vertex_set, 2);
 		int num_simplices = all_simplices.size();
-		std::cout << "total number of simplices: " << num_simplices << std::endl;
+		std::cerr << "total number of simplices: " << num_simplices << std::endl;
 		size_satisfied = true;
 	}
 	else  {
@@ -127,7 +127,7 @@ bool SparseRipsFiltration::build_filtration()  {
 			metric_space->set_time_scale(0.5*(upper_scale+lower_scale));
 			this->sparse_bron_kerbosch(&all_simplices, vertex_set, 2);
 			int num_simplices = all_simplices.size();
-			std::cout << "total number of simplices["<<iteration<<"]: " << num_simplices << "; scale: " << metric_space->get_time_scale() << " ("<<lower_scale<<","<<upper_scale<<")"<<std::endl;
+			std::cerr << "total number of simplices["<<iteration<<"]: " << num_simplices << "; scale: " << metric_space->get_time_scale() << " ("<<lower_scale<<","<<upper_scale<<")"<<std::endl;
 
 			if(max_simplices == 0)  {
 				size_satisfied = true;
@@ -141,7 +141,7 @@ bool SparseRipsFiltration::build_filtration()  {
 
 			if (iteration >= 50) {
 				size_satisfied = true;
-				std::cout << "filtration iteration too high, bailing" << std::endl;
+				std::cerr << "filtration iteration too high, bailing" << std::endl;
 				break;
 			}
 
@@ -168,9 +168,9 @@ bool SparseRipsFiltration::build_filtration()  {
 		vertex_set.insert(sorted_vertices[i].ind);
 	ComputationTimer bf_bk("brute force bron kerbosch");
 	bf_bk.start();
-	std::cout << "brute force bron kerbosch..." << std::endl;
+	std::cerr << "brute force bron kerbosch..." << std::endl;
 	this->bf_bron_kerbosch(&all_simplices, std::vector<int>(), vertex_set, 2);
-	std::cout << "... done with brute force bron kerbosch... " << all_simplices.size() << std::endl;
+	std::cerr << "... done with brute force bron kerbosch... " << all_simplices.size() << std::endl;
 	bf_bk.end();
 	bf_bk.dump_time();
 	*/
@@ -189,7 +189,7 @@ bool SparseRipsFiltration::build_filtration()  {
 			max_num_simplices *= (num_points-j);
 		for(int j = 1; j <= i; j++)
 			max_num_simplices /= (j+1);
-		std::cout << "number of " << i << " simplices: " << simplex_count[i] << " / " << max_num_simplices << " ; sparsity: " << 100.0*((double)simplex_count[i]/max_num_simplices) << "%" << std::endl;
+		std::cerr << "number of " << i << " simplices: " << simplex_count[i] << " / " << max_num_simplices << " ; sparsity: " << 100.0*((double)simplex_count[i]/max_num_simplices) << "%" << std::endl;
 		simplex_sparsity.push_back(((double)simplex_count[i]/max_num_simplices));
 	}
 	return size_satisfied;
@@ -241,7 +241,7 @@ void SparseRipsFiltration::bf_bron_kerbosch(std::vector<Simplex>* _rips, std::ve
 		}
 
 		if(exceeds_deletion_time)  {
-			//std::cout << "removing element..." << std::endl;
+			//std::cerr << "removing element..." << std::endl;
 			R_new.pop_back();
 			continue;
 		}
@@ -266,7 +266,7 @@ void SparseRipsFiltration::sparse_bron_kerbosch(std::vector<Simplex>* _rips, std
 		int v = *i_it;
 		std::set<int> P_candidate = _P;
 		//std::set<int> P_candidate = cover_tree->ball_query(points[v],metric_space->get_deletion_time(v));
-		//std::cout << "P_candidate["<<v<<"] number of points queried: " << P_candidate.size() << " / " << _P.size() << std::endl;
+		//std::cerr << "P_candidate["<<v<<"] number of points queried: " << P_candidate.size() << " / " << _P.size() << std::endl;
 
 		std::set<int> P;
 		for(std::set<int>::iterator i_it = P_candidate.begin(); i_it != P_candidate.end(); ++i_it)  {

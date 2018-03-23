@@ -46,25 +46,25 @@ std::map<std::string, int> SimplicialComplex::get_simplex_map() const {
 }
 
 void SimplicialComplex::print() const {
-    std::cout << "{ ";
+    std::cerr << "{ ";
     for(int i = 0; i < this->allSimplicis.size(); i ++) {
-        if(i > 0) { std::cout << ", "; }
-        std::cout << "{" << this->allSimplicis[i] << "}";
+        if(i > 0) { std::cerr << ", "; }
+        std::cerr << "{" << this->allSimplicis[i] << "}";
     }
-    std::cout << " }" << std::endl;
+    std::cerr << " }" << std::endl;
 }
 
 std::vector<Simplex> SimplicialComplex::cofacesOf(Simplex s) {
   // TODO need special data structure so finding cofaces could be faster
-  //std::cout << "calculating cofaces" << std::endl;
+  //std::cerr << "calculating cofaces" << std::endl;
   std::vector<Simplex> cofaces;
   cofaces.push_back(s);
   for(auto & e: this->allSimplicis) {
-    //std::cout << "simplex: " << e << std::endl;
+    //std::cerr << "simplex: " << e << std::endl;
     if(e.dim() > s.dim()) {
       auto faces = e.faces();
       //for(auto & f : faces) {
-        ////std::cout << "face: " << f << std::endl;
+        ////std::cerr << "face: " << f << std::endl;
         //if(f.as_vector() == s.as_vector()) {
           //cofaces.push_back(e);
         //}

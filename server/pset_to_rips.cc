@@ -129,8 +129,8 @@ int main(int argc, char *argv[]) {
   bool sparse = false;
   double max_d = 0.0;
   if (argc > 3) {
-    sparse = string(argv[4]) == "-s";
-    max_d = atof(argv[3]);
+    sparse = string(argv[3]) == "-s";
+    max_d = atof(argv[4]);
   }
 
   if (!sparse) {
@@ -144,6 +144,7 @@ int main(int argc, char *argv[]) {
       exit(1);
     }
   } else {
+    std::cerr << "Using sparse rips complex with parameter " << max_d << std::endl;
     switch (dim) {
     case 2: convert_sparse_rips<2>(filePath, max_d); break;
     case 3: convert_sparse_rips<3>(filePath, max_d); break;

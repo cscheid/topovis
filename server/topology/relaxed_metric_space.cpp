@@ -66,11 +66,11 @@ double RelaxedMetricSpace::distance(int _i, int _j)  {
 	if(alpha_4 >= t_p && alpha_4 > (1-2*eps)*t_q && alpha_4 < t_q)
 		return alpha_4;
 
-	std::cout << "unknown alpha case! " << local_dist << " t_p: " << t_p << " ; t_q: " << t_q << std::endl;
+	std::cerr << "unknown alpha case! " << local_dist << " t_p: " << t_p << " ; t_q: " << t_q << std::endl;
 	double min_alpha_p = (1-2*eps)*t_p, max_alpha_p = t_p;
 	double min_alpha_q = (1-2*eps)*t_q, max_alpha_q = t_q;
-	std::cout << "min alpha_p: " << min_alpha_p << " ; max alpha_p: " << max_alpha_p << " ; min alpha_q: " << min_alpha_q << " ; max alpha_q: " << max_alpha_q << std::endl;
-	std::cout << "alpha_1: " << alpha_1 << " ; alpha_2: " << alpha_2 << " ; alpha_3: " << alpha_3 << " ; alpha_4: " << alpha_4 << std::endl;
+	std::cerr << "min alpha_p: " << min_alpha_p << " ; max alpha_p: " << max_alpha_p << " ; min alpha_q: " << min_alpha_q << " ; max alpha_q: " << max_alpha_q << std::endl;
+	std::cerr << "alpha_1: " << alpha_1 << " ; alpha_2: " << alpha_2 << " ; alpha_3: " << alpha_3 << " ; alpha_4: " << alpha_4 << std::endl;
 
 	return alpha_1;
 }

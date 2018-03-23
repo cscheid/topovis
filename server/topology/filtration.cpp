@@ -20,10 +20,10 @@ SimplicialComplex Filtration::get_complex() {
 }
 
 void Filtration::print() {
-    std::cout << "{ ";
+    std::cerr << "{ ";
     for(int i = 0; i < this->filtration_size(); i ++) {
-        if(i > 0) { std::cout << ", "; }
-        std::cout << "{" << this->get_simplex(i) << "}";
+        if(i > 0) { std::cerr << ", "; }
+        std::cerr << "{" << this->get_simplex(i) << "}";
     }
-    std::cout << " }" << std::endl;
+    std::cerr << " }" << std::endl;
 }

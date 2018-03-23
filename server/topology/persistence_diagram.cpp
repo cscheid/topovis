@@ -69,9 +69,9 @@ std::pair<std::vector<int>,std::vector<int> > PersistenceDiagram::wasserstein_ma
 	}
 
 	HungarianDistance hungarian(cost_mat,max_size,false);
-	std::cout << "hungarian algorithm..." << std::endl;
+	std::cerr << "hungarian algorithm..." << std::endl;
 	hungarian.compute();
-	std::cout << "... done with hungarian algorithm..." << std::endl;
+	std::cerr << "... done with hungarian algorithm..." << std::endl;
 
 	for(int i = 0; i < max_size; i++)
 		delete [] cost_mat[i];
@@ -109,13 +109,13 @@ std::pair<std::vector<int>,std::vector<int> > PersistenceDiagram::wasserstein_ma
 	// verify: did we assign everyone?
 	for(int i = 0; i < our_assignment.size(); i++)  {
 		if(our_assignment[i] == -2)  {
-			std::cout << "our not assigned!!! " << i << std::endl;
+			std::cerr << "our not assigned!!! " << i << std::endl;
 			our_assignment[i] = -1;
 		}
 	}
 	for(int i = 0; i < other_assignment.size(); i++)  {
 		if(other_assignment[i] == -2)  {
-			std::cout << "other not assigned!!! " << i << std::endl;
+			std::cerr << "other not assigned!!! " << i << std::endl;
 			other_assignment[i] = -1;
 		}
 	}

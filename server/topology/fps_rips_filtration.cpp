@@ -21,7 +21,7 @@ bool FPSRipsFiltration::build_filtration()  {
 	deletion_times = std::vector<double>(num_points,0);
 	for(unsigned i = 0; i < num_points; i++)  {
 		deletion_times[(sampling[i])] = fps_distances[i]*eps;
-		//std::cout << "deletion times["<<sampling[i]<<"] : " << deletion_times[(sampling[i])] << std::endl;
+		//std::cerr << "deletion times["<<sampling[i]<<"] : " << deletion_times[(sampling[i])] << std::endl;
 	}
 
 	delete [] sampling;
@@ -73,9 +73,9 @@ bool FPSRipsFiltration::build_filtration()  {
 		}
 
 		if(exceeds_deletion_time && sparse_simplex_ids.find(simplex_id) != sparse_simplex_ids.end())
-			std::cout << "simplex " << simplex_id << " should not be included!" << std::endl;
+			std::cerr << "simplex " << simplex_id << " should not be included!" << std::endl;
 		if(!exceeds_deletion_time && sparse_simplex_ids.find(simplex_id) == sparse_simplex_ids.end())
-			std::cout << "simplex " << simplex_id << " should be included!" << std::endl;
+			std::cerr << "simplex " << simplex_id << " should be included!" << std::endl;
 	}
 	return true;
 }
@@ -114,7 +114,7 @@ void FPSRipsFiltration::sparse_bron_kerbosch(std::vector<Simplex>* _rips, std::v
 		}
 
 		if(exceeds_deletion_time)  {
-			//std::cout << "removing element..." << std::endl;
+			//std::cerr << "removing element..." << std::endl;
 			R_new.pop_back();
 			continue;
 		}
@@ -134,12 +134,12 @@ void FPSRipsFiltration::fps(int* sampling, double* fps_distances)  {
 	}
 
 	// add points one at a time, farthest in Euclidean distance from all other points
-	std::cout << "farthest point sampling " << std::flush;
+	std::cerr << "farthest point sampling " << std::flush;
 	int num_dots = 50 >= num_points ? (num_points-1) : 50;
 	int dot_interval = num_points / num_dots;
 	for(int i = 1; i < num_points; i++)  {
 		if(i % dot_interval == 0)
-			std::cout << "." << std::flush;
+			std::cerr << "." << std::flush;
 		double max_dist = -1e10;
 		int best_ind = -1;
 
@@ -160,6 +160,6 @@ void FPSRipsFiltration::fps(int* sampling, double* fps_distances)  {
 		sampling[i] = best_ind;
 		fps_distances[i] = max_dist;
 	}
-	std::cout << std::endl;
+	std::cerr << std::endl;
 	delete [] minimum_distances;
 }

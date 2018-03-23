@@ -17,12 +17,12 @@ BMCol::BMCol() {
 
 void BMCol::print() {
     header.print();
-    std::cout << "|";
+    std::cerr << "|";
     for(auto & e: faces) {
         e.print();
-        std::cout << " ";
+        std::cerr << " ";
     }
-    std::cout << std::endl;
+    std::cerr << std::endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

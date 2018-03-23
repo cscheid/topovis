@@ -121,7 +121,7 @@ void HungarianDistance::augment() {
    }
 
 	num_augment++;
-	std::cout << "entering main augment loop: " << num_augment << std::endl;
+	std::cerr << "entering main augment loop: " << num_augment << std::endl;
    //second part of augment() function
    while (true) {                                                        //main cycle
       while (rd < wr)                                                 //building tree with bfs cycle
